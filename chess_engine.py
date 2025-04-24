@@ -587,18 +587,28 @@ class Move:
         self.is_castle_move = is_castle_move
         # Tạo ID duy nhất cho mỗi nước đi
         self.move_id = self.start_row * 1000 + self.start_col * 100 + self.end_row * 10 + self.end_col
-        
+
+    '''
+    Override the equals method
+    '''
     def __eq__(self, other):
         if isinstance(other, Move):
             return self.move_id == other.move_id
         return False
-        
+
+    '''
+    Override the hash method
+    '''
+    def __hash__(self):
+        # Return the hash of the unique move_id (which is an integer)
+        return hash(self.move_id)
+
     def get_chess_notation(self):
         """
         Chuyển đổi nước đi sang ký hiệu đại số
         """
         return self.get_rank_file(self.start_row, self.start_col) + self.get_rank_file(self.end_row, self.end_col)
-    
+
     def get_rank_file(self, row, col):
         """
         Chuyển đổi tọa độ (row, col) sang ký hiệu đại số (ví dụ: "e4")

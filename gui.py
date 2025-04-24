@@ -181,11 +181,10 @@ def main():
         
         if ai_thinking and not move_finder_process.is_alive():
             ai_move = return_queue.get()
-            if ai_move is None:
-                ai_move = chess_ai.find_random_move(valid_moves)
-            game_state.make_move(ai_move)
-            move_made = True
-            animate = True
+            if ai_move is not None:
+                game_state.make_move(ai_move)
+                move_made = True
+                animate = True
             ai_thinking = False
         
         if move_made:
